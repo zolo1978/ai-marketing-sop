@@ -1,0 +1,16 @@
+{
+  "name": "ai-marketing-sop",
+  "version": "1.0.0",
+  "description": "AI营销SOP系统 - Monorepo",
+  "private": true,
+  "scripts": {
+    "install": "cd backend && npm install",
+    "build": "cd backend && npm run build",
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
