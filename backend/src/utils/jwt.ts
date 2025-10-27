@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 
 interface JwtPayload {
   userId: string;
@@ -28,18 +28,20 @@ const getExpiresIn = (type: 'access' | 'refresh'): string => {
  * 生成访问Token
  */
 export const generateAccessToken = (userId: string): string => {
-  return jwt.sign({ userId }, getSecret('access'), {
-    expiresIn: getExpiresIn('access'),
-  });
+  const options: SignOptions = {
+    expiresIn: getExpiresIn('access') as any,
+  };
+  return jwt.sign({ userId }, getSecret('access'), options);
 };
 
 /**
  * 生成刷新Token
  */
 export const generateRefreshToken = (userId: string): string => {
-  return jwt.sign({ userId }, getSecret('refresh'), {
-    expiresIn: getExpiresIn('refresh'),
-  });
+  const options: SignOptions = {
+    expiresIn: getExpiresIn('refresh') as any,
+  };
+  return jwt.sign({ userId }, getSecret('refresh'), options);
 };
 
 /**
