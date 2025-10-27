@@ -1,0 +1,16 @@
+# Nixpacks 配置 - 告诉 Railway 如何构建后端项目
+
+[phases.setup]
+nixPkgs = ['nodejs_20']
+
+[phases.install]
+cmds = [
+  'cd backend',
+  'npm ci --prefer-offline --no-audit'
+]
+
+[phases.build]
+cmds = []
+
+[start]
+cmd = 'cd backend && npm run dev'
