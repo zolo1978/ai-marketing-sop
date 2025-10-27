@@ -43,7 +43,7 @@ export const mockAuthAPI = {
   /**
    * Mock 刷新Token
    */
-  refreshToken: async (refreshToken: string): Promise<AuthResponse> => {
+  refreshToken: async (_refreshToken: string): Promise<AuthResponse> => {
     await delay(500);
     return {
       user: mockUser,
