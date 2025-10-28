@@ -74,6 +74,32 @@ const initializeServer = async (): Promise<void> => {
     // 7. API路由
     app.use('/api/auth', authRoutes);
 
+    // 7.5 临时 Seed 端点（仅生产环境初始化用）
+    app.post('/api/seed', async (req, res) => {
+      try {
+        const { User } = await import('./models/User.js');
+
+        // 检查测试用户是否已存在
+        const existingUser = await User.findOne({ email: 'test@example.com' });
+        if (existingUser) {
+          return res.json({ success: true, message: '测试用户已存在' });
+        }
+
+        // 创建测试用户
+        const testUser = new User({
+          email: 'test@example.com',
+          password: 'password123',
+          name: '测试用户'
+        });
+
+        await testUser.save();
+
+        res.json({ success: true, message: '测试用户创建成功' });
+      } catch (error: any) {
+        res.status(500).json({ success: false, message: error.message });
+      }
+    });
+
     // 8. 404处理
     app.use(notFoundHandler);
 
